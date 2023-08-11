@@ -3,14 +3,14 @@ url: "https://lichess.org/"  # Lichess base URL.
 
 engine:                      # Engine settings.
   dir: "./engines/"          # Directory containing the engine. This can be an absolute path or one relative to lichess-bot/.
-  name: "engine_name"        # Binary name of the engine to use.
+  name: "engine_name.exe"        # Binary name of the engine to use.
   working_dir: ""            # Directory where the chess engine will read and write files. If blank or missing, the current directory is used.
                              # NOTE: If working_dir is set, the engine will look for files and directories relative to this directory, not where lichess-bot was launched. Absolute paths are unaffected.
   protocol: "uci"            # "uci", "xboard" or "homemade"
   ponder: true               # Think on opponent's time.
 
   polyglot:
-    enabled: false           # Activate polyglot book.
+    enabled: false           # Activate polyglot book. Must be a bin files. Search for polygot chess opening book bin. i love cerebellum and goi.
     book:
       standard:              # List of book file paths for variant standard.
         - engines/book1.bin
@@ -22,11 +22,11 @@ engine:                      # Engine settings.
 #     Use the same pattern for 'giveaway' (antichess), 'crazyhouse', 'horde', 'kingofthehill', 'racingkings' and '3check' as well.
     min_weight: 1            # Does not select moves with weight below min_weight (min 0, max: 65535).
     selection: "weighted_random" # Move selection is one of "weighted_random", "uniform_random" or "best_move" (but not below the min_weight in the 2nd and 3rd case).
-    max_depth: 8             # How many moves from the start to take from the book.
+    max_depth: 20             # How many moves from the start to take from the book.
 
   draw_or_resign:
     resign_enabled: false
-    resign_score: -1000      # If the score is less than or equal to this value, the bot resigns (in cp).
+    resign_score: -800      # If the score is less than or equal to this value, the bot resigns (in cp).
     resign_for_egtb_minus_two: true # If true the bot will resign in positions where the online_egtb returns a wdl of -2.
     resign_moves: 3          # How many moves in a row the score has to be below the resign value.
     offer_draw_enabled: false
@@ -38,26 +38,26 @@ engine:                      # Engine settings.
   online_moves:
     max_out_of_book_moves: 10 # Stop using online opening books after they don't have a move for 'max_out_of_book_moves' positions. Doesn't apply to the online endgame tablebases.
     max_retries: 2           # The maximum amount of retries when getting an online move.
-    chessdb_book:
+    chessdb_book: # Get chess database book from chessdb.cn
       enabled: false
       min_time: 20
       move_quality: "good"   # One of "all", "good", "best".
       min_depth: 20          # Only for move_quality: "best".
-    lichess_cloud_analysis:
+    lichess_cloud_analysis: # Get lichess cloud analysis from Lichess cloud
       enabled: false
       min_time: 20
       move_quality: "good"   # One of "good", "best".
       max_score_difference: 50 # Only for move_quality: "good". The maximum score difference (in cp) between the best move and the other moves.
       min_depth: 20
       min_knodes: 0
-    lichess_opening_explorer:
+    lichess_opening_explorer: Opening explorer from lichess
       enabled: false
       min_time: 20
       source: "masters"      # One of "lichess", "masters", "player"
       player_name: ""        # The lichess username. Leave empty for the bot's username to be used. Used only when source is "player".
       sort: "winrate"        # One of "winrate", "games_played"
       min_games: 10          # Minimum number of times a move must have been played to be chosen.
-    online_egtb:
+    online_egtb: Endgame Tablebases for faster and accurate endgame techniques
       enabled: false
       min_time: 20
       max_pieces: 7
@@ -85,9 +85,9 @@ engine:                      # Engine settings.
   homemade_options:
 #   Hash: 256
 
-  uci_options:               # Arbitrary UCI options passed to the engine.
-    Move Overhead: 100       # Increase if your bot flags games too often.
-    Threads: 2               # Max CPU threads the engine can use.
+  uci_options:               # Arbitrary UCI options passed to the engine. type isready and uci if you are using uci chess engines
+    Move Overhead: 5000       # Increase if your bot flags games too often.
+    Threads: 2               # Max CPU threads the engine can use from your computers
     Hash: 256                # Max memory (in megabytes) the engine can allocate.
     SyzygyPath: "./syzygy/"  # Paths to Syzygy endgame tablebases
 #   go_commands:             # Additional options to pass to the UCI go command.
