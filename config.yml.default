@@ -89,11 +89,11 @@ engine:                      # Engine settings.
     Move Overhead: 5000       # Increase if your bot flags games too often.
     Threads: 2               # Max CPU threads the engine can use from your computers
     Hash: 256                # Max memory (in megabytes) the engine can allocate.
-    SyzygyPath: "./syzygy/"  # Paths to Syzygy endgame tablebases
-#   go_commands:             # Additional options to pass to the UCI go command.
-#     nodes: 1               # Search so many nodes only.
-#     depth: 5               # Search depth ply only.
-#     movetime: 1000         # Integer. Search exactly movetime milliseconds.
+    go_commands:             # Additional options to pass to the UCI go command.
+      nodes: 1               # Search so many nodes only.
+      depth: 25               # Search depth ply only.
+      movetime: 30000         # Integer. Search exactly movetime milliseconds.
+      max_game_time:300
 
 # xboard_options:            # Arbitrary XBoard options passed to the engine.
 #   cores: "4"
