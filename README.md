@@ -165,10 +165,11 @@ option name EvalFile type string default nn-62ef826d1a6d.nnue
 uciok
 ```
 Any of the names following `option name` can be listed in `uci_options` in order to configure the Stockfish engine.
+I recommend Move Overhead to be 5000 and skill level 20 as it's powerful strength. If you want weaker and slowing your bot then change it's as a lower values of your engines
 ```yml
   uci_options:
-    Move Overhead: 100
-    Skill Level: 10
+    Move Overhead: 5000
+    Skill Level: 20
 ```
 The exceptions to this are the options `uci_chess960`, `uci_variant`, `multipv`, and `ponder`. These will be handled by lichess-bot after a game starts and should not be listed in `config.yml`. Also, if an option is listed under `uci_options` that is not in the list printed by the engine, it will cause an error when the engine starts because the engine won't understand the option. The word after `type` indicates the expected type of the options: `string` for a text string, `spin` for a numeric value, `check` for a boolean True/False value.
 
